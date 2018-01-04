@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="base.stylesheets"
+		template="/WEB-INF/views/templates/page/stylesheets.jsp">
+		<!-- Style base -->
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/resources/css/bootstrap.min.css" />
+			<add-attribute value="/resources/css/font-awesome.min.css" />
+			<add-attribute value="/resources/css/jquery-ui.css" />
+			<add-attribute value="/resources/css/main.css" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="base.javascript"
+		template="/WEB-INF/views/templates/page/js_footer.jsp">
+		<!-- JavaScript base -->
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/resources/js/jquery-2.2.4.min.js" />
+			<add-attribute value="/resources/js/jquery-ui.min.js" />
+			<add-attribute value="/resources/js/bootstrap.min.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="client.javascript" extends="base.javascript">
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute value="/resources/js/Client.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="defaultTemplate"
+		template="/WEB-INF/views/templates/layout/layout.jsp">
+		<put-attribute name="title" expression="${titulo}" />
+		<put-attribute name="description" expression="${descripcion}" />
+		<put-attribute name="stylesheets" value="base.stylesheets" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/templates/page/menu.jsp" />
+		<put-attribute name="tituloPagina" expression="${tituloPagina}" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/templates/page/footer.jsp" />
+		<put-attribute name="js_footer" value="base.javascript" />
+	</definition>
+
+	<definition name="frontendTemplate"
+		template="/WEB-INF/views/frontend/templates/layout/layout.jsp">
+		<put-attribute name="title" expression="${titulo}" />
+		<put-attribute name="description" expression="${descripcion}" />
+		<put-attribute name="stylesheets" value="base.stylesheets" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/frontend/templates/page/menu.jsp" />
+		<put-attribute name="tituloPagina" expression="${tituloPagina}" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/frontend/templates/page/footer.jsp" />
+		<put-attribute name="js_footer" value="base.javascript" />
+	</definition>
+
+	<definition name="middleTemplate"
+		template="/WEB-INF/views/templates/layout/layout.jsp">
+		<put-attribute name="title" expression="${titulo}" />
+		<put-attribute name="description" expression="${descripcion}" />
+		<put-attribute name="stylesheets" value="base.stylesheets" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/middle/templates/page/menu.jsp" />
+		<put-attribute name="tituloPagina" expression="${tituloPagina}" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/middle/templates/page/footer.jsp" />
+		<put-attribute name="js_footer" value="client.javascript" />
+	</definition>
+
+
+	<definition name="loginTemplate"
+		template="/WEB-INF/views/templates/layout/layout.jsp">
+		<put-attribute name="title" expression="${titulo}" />
+		<put-attribute name="description" expression="${descripcion}" />
+		<put-attribute name="stylesheets" value="base.stylesheets" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/login/templates/page/menu.jsp" />
+		<put-attribute name="tituloPagina" expression="${tituloPagina}" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/login/templates/page/footer.jsp" />
+		<put-attribute name="js_footer" value="base.javascript" />
+	</definition>
+
+	<definition name="gmaps.javascripts" extends="base.javascript">
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="http://maps.google.com/maps/api/js?key=AIzaSyCN5nRASyLjmACVK9ZfBxZ34MfhCcaghZA" />
+			<add-attribute value="/resources/js/gmaps.js" />
+			<add-attribute value="/resources/js/mapa.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="formularioGMaps" extends="frontendTemplate">
+		<put-attribute name="js_footer" value="gmaps.javascripts" />
+	</definition>
+
+	<definition name="app.javascript" extends="base.javascript">
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute value="/resources/js/App.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="AppTemplate" extends="frontendTemplate">
+		<put-attribute name="js_footer" value="app.javascript" />
+	</definition>
+
+
+
+</tiles-definitions>
